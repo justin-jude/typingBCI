@@ -1,0 +1,62 @@
+dataset:
+  name: typing
+  sessions: # each session is all the training blocks from a given subject/day
+  - t17.2024.06.03
+  datasetProbabilityVal: [1.0]
+  dataDir:  # path to all sessions
+  - ../../Data/t17/t17.2024.06.03/Typing/tfdata_20ms
+  whiteNoiseSD: 1.5      # SD of whtie noise that is added to neural data for training  
+  constantOffsetSD: 0.4   # SD of constant offset noise for each channel  
+  randomWalkSD: 0       # SD of random walk noise for each channel 
+  nInputFeatures: 512     # number of neural features. Usually twice the number of channels (spikes + bandpower for each) 
+  staticGainSD: 0       # SD of static gain noise 
+  randomCut: 0          
+  nClasses: 30            # number of characters. 30 for open english.
+  maxSeqElements: 60     # maximum number of phonemes per sentence.
+  bufferSize: 1024
+model:
+  nUnits: 512             # number of units per GRU layer
+  inputLayerSize: 512     # input layer size is typically same as number of input features
+  subsampleFactor: 1    
+  weightReg: 1.0e-05      # weight regularization
+  actReg: 0.0             # activity regularization
+  dropout: 0.8           # dropout for GRU layers  
+  trainable: true         # is the model trainable?
+  nLayers: 5              # number of GRU layers  
+  patch_size: 15         # how many patches 
+  patch_stride: 9       # take every nth bin 
+  inputNetwork:
+    nInputLayers: 1       # one input layer per network
+    inputLayerSizes:      # input layer size should be the same as the number of input features 
+    - 512
+    trainable: true       # trainable input network?
+    activation: softsign  
+    dropout: 0.2          # dropout for input networks 
+gpuNumber: '0'            # which GPU to use for training. 0 uses the first one.
+mode: train
+outputDir: T17Models/20Train
+loadDir:  T17Models/20Train           
+loadCheckpointIdx: null
+smoothInputs: 1           # temporal gaussian smooth of input features
+smoothKernelSD: 3
+learnRateStart: 0.02      # learning rate starts here and decays over X batches
+learnRateEnd: 0.0
+learnRateDecaySteps: 10000
+learnRatePower: 1.0       # power for learning rate degredation. 1 is linear.
+trainableInput: true
+trainableBackend: true
+seed: -1
+batchesPerSave: 0
+batchesPerVal: 50         # how often to do validation (lower # = slower training)
+nBatchesToTrain: 10000    # how many batches to train for
+batchSize: 64             # how many trials per batch
+inputScale: 1.0
+inferenceOutputFileName: null
+inputLayerForInference: null
+gradClipValue: 10         # clip gradients to prevent explosion
+lossType: ctc
+normLayer: false
+randomWalkAxis: -1
+warmUpSteps: 0
+early_stopping_num_batches: 1000
+EndCER: 0

@@ -1,0 +1,13 @@
+numpy==1.26.0
+scikit-learn
+tensorflow==2.14.0
+omegaconf
+pyyaml
+matplotlib
+jupyter
+g2p_en
+seaborn
+scipy
+pandas
+numba
+redis
