@@ -57,6 +57,6 @@ Then run `jupyter notebook` to access and run the notebooks in the repository.
 
 Place data for each participant in the `Data` folder.
 
-Typing data for participants T17 and T18, as well as handwriting data for T18 are available here: https://datadryad.org/dataset/doi:10.5061/dryad.cz8w9gjjk
+Typing data for participants T17 and T18, handwriting data for T18,  as well as the character-based 5-gram language model are available here: https://datadryad.org/dataset/doi:10.5061/dryad.cz8w9gjjk
 
 Handwriting data for participant T5 is available here: https://datadryad.org/dataset/doi:10.5061/dryad.wh70rxwmv
